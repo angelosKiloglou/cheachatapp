@@ -28,8 +28,6 @@ pub async fn run(config: AppConfig) -> std::io::Result<()> {
     // Create the chat server actor
     let chat_server = chat::ChatServer::new(db_pool.clone()).start();
 
-    // Load t
-    let tls_config = config::load_tls_config();
     let server = HttpServer::new(move || {
         App::new()
             .wrap(Cors::permissive()) // Permissive cors for simplicity
@@ -40,9 +38,9 @@ pub async fn run(config: AppConfig) -> std::io::Result<()> {
             .configure(chat::init_routes)
             .service(index)
     })
-        .bind_rustls_0_23(config.server_addr.clone(), tls_config)?
+        .bind(config.server_addr.clone())?
         .run();
-    println!("Server running at https://{}/", config.server_addr);
+    println!("Server running at http://{}/", config.server_addr);
 
     server.await
 }

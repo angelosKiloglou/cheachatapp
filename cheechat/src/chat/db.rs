@@ -136,7 +136,6 @@ pub async fn get_chat_overviews(
         .fetch_all(pool)
         .await?;
 
-    println!("These are the chats: {:?}", &chat_overviews);
     Ok(chat_overviews)
 }
 
