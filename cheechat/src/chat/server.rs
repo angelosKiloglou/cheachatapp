@@ -169,10 +169,3 @@ impl Handler<ClientMessage> for ChatServer {
         });
     }
 }
-
-#[cfg(test)]
-mod test {
-    use super::*;
-
-
-}
