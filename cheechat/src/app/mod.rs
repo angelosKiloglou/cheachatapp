@@ -21,7 +21,7 @@ pub async fn run(config: AppConfig) -> std::io::Result<()> {
 
     // Create the redis session store
     let private_key = actix_web::cookie::Key::generate();
-    let store = RedisSessionStore::new(config.res_addr)
+    let store = RedisSessionStore::new(config.redis_addr)
         .await
         .unwrap();
 
